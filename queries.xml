@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<queries>
+
+    <query>
+        <body>SELECT * FROM user_table</body>
+        <params>
+
+        </params>
+        <load_on_start>true</load_on_start>
+    </query>
+
+    <query>
+        <body>SELECT * FROM user_table WHERE name=? AND id=?</body>
+        <params>
+            <param>
+                <id>1</id>
+                <value>имя</value>
+            </param>
+            <param>
+                <id>2</id>
+                <value>идентификатор</value>
+            </param>
+        </params>
+        <load_on_start>false</load_on_start>
+    </query>
+
+</queries>

@@ -1,0 +1,31 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="SQLbuilder2">
+    <output-path>$PROJECT_DIR$/out/artifacts/SQLbuilder2</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.home.SQLbuilder" />
+        <option name="description" value="" />
+        <option name="htmlParamFile" value="" />
+        <option name="paramFile" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="SQLbuilder.jar">
+        <element id="module-output" name="SQLbuilder" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="net.sourceforge.dynamicreports:dynamicreports-adhoc:4.1.0" />
+        <element id="library" level="project" name="net.sourceforge.dynamicreports:dynamicreports-core:4.1.0" />
+        <element id="library" level="project" name="net.sourceforge.dynamicreports:dynamicreports-googlecharts:4.1.0" />
+        <element id="library" level="project" name="org.apache.commons:commons-lang3:3.3" />
+        <element id="library" level="project" name="sqlite-jdbc-3.8.11.2" />
+        <element id="library" level="project" name="scriptlets" />
+      </element>
+      <element id="directory" name="resources">
+        <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+      </element>
+    </root>
+  </artifact>
+</component>

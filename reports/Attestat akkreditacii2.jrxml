@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Attestat akkreditacii" pageWidth="421" pageHeight="595" columnWidth="337" leftMargin="42" rightMargin="42" topMargin="20" bottomMargin="20" uuid="523c622d-bbf6-4ab8-97a3-6973eaf1b429">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="f2f338a4-f60a-47eb-9077-24a8fe33a14b">
+		<parameter name="Type" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="id" class="java.lang.String">
+		<defaultValueExpression><![CDATA["11"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_final" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1932419050060904037"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select type, end_date, date, pers.fam, pers.name, pers.otch,
+ pers2.fam as fam2, pers2.name as name2, pers2.otch as otch2,
+pers2.pos from sdb_main, wdb_tsk, pers, pers as pers2
+where (sdb_main.id = $P{id} or sdb_main.id = 10)
+and wdb_tsk.id = $P{id_final} and wdb_tsk.id_pers = pers.id
+and  pers2.pos = "ведущий инженер по метрологии";]]>
+	</queryString>
+	<field name="Type" class="java.lang.Object"/>
+	<field name="End_date" class="java.lang.Object"/>
+	<field name="Date" class="java.lang.Object"/>
+	<field name="Fam" class="java.lang.Object"/>
+	<field name="Name" class="java.lang.Object"/>
+	<field name="Otch" class="java.lang.Object"/>
+	<field name="fam2" class="java.lang.Object"/>
+	<field name="name2" class="java.lang.Object"/>
+	<field name="otch2" class="java.lang.Object"/>
+	<field name="Pos" class="java.lang.Object"/>
+	<variable name="month" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("MMMMM").format(new java.text.SimpleDateFormat("dd.MM.yyyy").parse((String)$F{End_date}))]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="correct_month" class="java.lang.String">
+		<variableExpression><![CDATA[$V{month}.equals("Январь") == true ? "Января" :
+$V{month}.equals("Февраль") == true ? "Февраля" :
+$V{month}.equals("Март") == true ? "Марта" :
+$V{month}.equals("Апрель") == true ? "Апреля" :
+$V{month}.equals("Май") == true ? "Мая" :
+$V{month}.equals("Июнь") == true ? "Июня" :
+$V{month}.equals("Июль") == true ? "Июля" :
+$V{month}.equals("Август") == true ? "Августа" :
+$V{month}.equals("Сентябрь") == true ? "Сентября" :
+$V{month}.equals("Октябрь") == true ? "Октября" :
+$V{month}.equals("Ноябрь") == true ? "Ноября" :
+$V{month}.equals("Декабрь") == true ? "Декабря" :
+"Не известный"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="date_time_correct" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("«dd» ").format(new java.text.SimpleDateFormat("dd.MM.yyyy").parse((String)$F{End_date})) +
+$V{correct_month} +
+new java.text.SimpleDateFormat(" yyyy").format(new java.text.SimpleDateFormat("dd.MM.yyyy").parse((String)$F{End_date})) + " г."]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="monthEnd" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("MMMMM").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{Date}))]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="correct_monthEnd" class="java.lang.String">
+		<variableExpression><![CDATA[$V{monthEnd}.equals("Январь") == true ? "Января" :
+$V{monthEnd}.equals("Февраль") == true ? "Февраля" :
+$V{monthEnd}.equals("Март") == true ? "Марта" :
+$V{monthEnd}.equals("Апрель") == true ? "Апреля" :
+$V{monthEnd}.equals("Май") == true ? "Мая" :
+$V{monthEnd}.equals("Июнь") == true ? "Июня" :
+$V{monthEnd}.equals("Июль") == true ? "Июля" :
+$V{monthEnd}.equals("Август") == true ? "Августа" :
+$V{monthEnd}.equals("Сентябрь") == true ? "Сентября" :
+$V{monthEnd}.equals("Октябрь") == true ? "Октября" :
+$V{monthEnd}.equals("Ноябрь") == true ? "Ноября" :
+$V{monthEnd}.equals("Декабрь") == true ? "Декабря" :
+"Не известный"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="date_timeEnd_correct" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("«dd» ").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{Date})) +
+$V{correct_monthEnd} +
+new java.text.SimpleDateFormat(" yyyy").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{Date})) + " г."]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<detail>
+		<band height="555">
+			<staticText>
+				<reportElement x="0" y="199" width="363" height="20" uuid="d0062d54-12e1-4ef2-9197-be92f987b32e"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="129" width="260" height="20" uuid="fcb8143d-eab3-4c4d-a8c9-2849693a36b1"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование, тип, модификация, регистрационный номер в Федеральном
+информационном фонде по обеспечению единства измерений]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="379" width="363" height="20" uuid="f20ec14c-1a60-4644-8d34-34e937c2f075"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="289" width="363" height="20" uuid="373a81f3-b782-4f1f-8a65-81c876c7004a"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="399" width="169" height="20" uuid="1e652663-34e6-428d-a89d-692522be6325"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[и на основании результатов первичной]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="239" width="311" height="20" uuid="7f4d3f37-db1e-4a77-9ad8-67ba2055b518"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                             ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="470" width="148" height="20" uuid="4d1c473c-c3ff-4a29-842f-cada1530ce9b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Pos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="233" y="470" width="130" height="20" uuid="2d93717f-ee0b-4663-bc3f-c764e03bfc30"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                     ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="470" width="131" height="20" uuid="8d85b6ed-921e-4f0b-b1f0-2f6a42cee241"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="179" width="363" height="20" uuid="c75526ac-b036-432f-9567-fad6e5bca93e"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="233" y="500" width="104" height="20" uuid="de6c83f5-c8d1-4dc3-85c9-b75925dba0e4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[((String)$F{Name}).trim().charAt(0) + "." + ((String)$F{Otch}).trim().charAt(0) + "." + (String)$F{Fam}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="121" y="319" width="100" height="20" uuid="790a4dc2-dad9-44d8-a0d0-42913cc3b59f"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование, тип, заводской номер,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="149" width="363" height="20" uuid="5fd0e24f-96b9-4b30-9d74-f51b885e8c84"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="480" width="27" height="20" uuid="49b2177f-6cbb-451b-a2ed-86f52c1513b8"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Подпись]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="409" width="337" height="41" uuid="8ea5d423-65fd-474a-880f-0fa87d20d569"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[соответствующим установленным в описании типа метрологическим
+требованиям и пригодным к применению в сфере государственного
+регулирования обеспечения единства измерений.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="279" width="206" height="20" uuid="b934f6aa-d7ee-4b67-8f87-6dec5ace885b"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование документа, на основании которого выполнена поверка]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="399" width="98" height="20" uuid="d2a1adca-7f1c-4c02-b94b-465fed0c7b0d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[ поверки признано]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="359" width="151" height="20" uuid="e049d677-7496-4db6-8d6b-3737a6efe46a"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="500" width="102" height="20" uuid="b99589ce-78d9-40c3-955e-dd1f6b97b05f"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="359" width="205" height="20" uuid="dac14440-e305-4ff0-bc46-e899901386d2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[при следующих значениях влияющих факторов:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="520" width="126" height="20" uuid="f7637da0-e534-45e3-90bd-278d729ccfe5"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{date_timeEnd_correct}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="339" width="337" height="20" uuid="2557e3af-7096-4765-9419-9eb5398ac980"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[     регистрационный номер (при наличии), разряд, класс или погрешность эталона, применяемого при поверке]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="500" width="86" height="20" uuid="be6a00ba-673f-42de-aa53-82aa1212dec2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Поверитель]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="480" width="106" height="20" uuid="97d68428-08b0-4e85-b42a-87de661c2d03"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Инициалы, фамилия]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="269" width="232" height="20" uuid="99e16e94-0208-477f-8183-9572217d8f1d"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="119" width="237" height="20" uuid="528057f2-bb7c-4689-ae8f-73742c9f6393"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                          ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="309" width="242" height="20" uuid="a36affaa-d136-4a00-8421-5dc92219c533"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="520" width="86" height="20" uuid="2cb68aee-1898-4689-8dc2-466ec0c95cea"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Дата поверки]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="309" width="114" height="20" uuid="998d87f8-2bb9-4aff-987c-91a77c47a76e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[с применением эталонов:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="249" width="251" height="20" uuid="41a60a25-7941-48c0-a82a-50cdb89e380d"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование величин, диапазонов, на которых поверено средство измерений (если
+предусмотрено методкой поверки)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="450" width="100" height="20" uuid="5783597f-5980-4d72-86d5-c6934685c713"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Знак поверки]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="480" width="100" height="20" uuid="036e5d07-3643-4e8f-9cc2-d44f819b154e"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Должность руководителя подразделения]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement mode="Transparent" x="0" y="119" width="337" height="80" uuid="4ebe33f8-5238-49d0-b3d9-5b395d9d0cb8"/>
+				<textElement>
+					<font size="9" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="28.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                                          "+$F{Type} + " Here now starts very very very long text so it can not even exists on this low low low line so it might be splitted to another one and may be even more than that!!!!!!!!!!"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="369" width="125" height="20" uuid="8efac05e-1016-48bd-b7f3-72b8a8aad295"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[    приводят перечень влияющих факторов,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="389" width="337" height="20" uuid="23bb34ae-ded9-4dcf-bb5a-4c1acdaa8c73"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[нормированных в документе на методику поверки, с указанием их значений]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="329" width="363" height="20" uuid="fb1f7df2-9d81-4514-9bbc-94be1847f30d"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="470" width="102" height="20" uuid="e88d711f-66f2-4347-a1ca-c6316df92605"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="219" width="114" height="20" uuid="ac523902-fdf9-4edc-9095-1f164eff7ba6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[заводской номер (номера)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="269" width="121" height="20" uuid="ea6fe2e8-e721-4357-a55a-23fa0a6db8b5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[поверено в соответствии с]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="159" width="337" height="20" uuid="168af549-37b2-4658-9009-4f7b701baeb9"/>
+				<textElement textAlignment="Center">
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(если в состав средства измерений входят несколько автономных измерительных блоков, то приводится их перечень и
+заводские номера)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="219" width="223" height="20" uuid="d00af6e3-109a-4e4a-998e-ec878e90a20c"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                          ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="99" width="86" height="20" uuid="4e7daa04-6ed5-4223-80f3-66c940c5d902"/>
+				<textElement>
+					<font size="9" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Действительно до]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="229" y="99" width="108" height="20" uuid="af887553-7e6f-4994-8958-9a62dc211a18"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{date_time_correct}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="233" y="500" width="130" height="20" uuid="c1fa6ac8-64ca-4b03-8f49-ca87e0a81b4d"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                     ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="233" y="470" width="104" height="20" uuid="1f279714-5b14-489e-9e87-42a64f74f138"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[((String)$F{name2}).trim().charAt(0) + "." + ((String)$F{otch2}).trim().charAt(0) + "." + (String)$F{fam2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="209" width="337" height="20" uuid="9214ac52-03b4-4ed2-895d-6c51f800b4fc"/>
+				<textElement textAlignment="Center">
+					<font size="5" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[серия и номер знака предыдущей поверки (если такие серия и номер имеются)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="69" width="337" height="20" uuid="38d4be96-60cc-4396-a7e3-f8d638132567"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Аттестат аккредитации № RA.RU.311341]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="119" width="100" height="20" uuid="54ad9030-e667-4b8c-947a-35d9dd9dc2fc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Средство измерений]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="399" width="70" height="20" uuid="cb1f5ca2-3d8e-4820-b233-be6c01dd9380"/>
+				<textElement>
+					<font size="9" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[(периодической)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="510" width="27" height="19" uuid="4c72e2d2-725b-49b3-9ffa-1bd722b97f23"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Подпись]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="239" width="42" height="20" uuid="8cc125e4-b0e1-4aab-9148-6399954c6db4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[поверено]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="510" width="109" height="19" uuid="3f7d0803-af71-4e7f-b036-4d0b2958405d"/>
+				<textElement>
+					<font size="5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Инициалы, фамилия]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table" x="0" y="0" width="337" height="69" uuid="d5f0dfeb-0078-4c1a-af40-f0c6fd29e365"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="d2c1b37c-cb7d-4aae-8bf1-a9d3c173c65b">
+						<datasetParameter name="Type">
+							<datasetParameterExpression><![CDATA[$F{Type}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="59" uuid="870c7f96-09f8-438a-bdf4-aa9eb95b7c70">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="30" uuid="bcdfd303-6abb-425c-82b9-666e776c9ea3"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<text><![CDATA[Первая]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="31" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="54" uuid="d6354e5c-7871-4435-a799-de97ae48bfd4">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="54" height="30" uuid="9d8874ee-4bcf-464b-b485-8f68d00e6d7c"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<text><![CDATA[Вторая]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="31" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="60" uuid="9ed9004a-d831-4a7a-ba10-b261f8d07dc5">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="8d4fc8ca-6dc7-4a45-bca0-c7d457599947"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<text><![CDATA[Третья]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="31" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="162" uuid="5b4034e9-7a76-4569-96c7-6519c43a3c5d">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="162" height="30" uuid="b28fdf59-d375-4a22-922e-98d86ea5beb0"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<text><![CDATA[Динамическая]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="31" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="162" height="31" uuid="86c01b14-972b-461f-be7f-b84b2247863c"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textFieldExpression><![CDATA[$P{Type}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

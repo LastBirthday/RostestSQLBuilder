@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Attestat akkreditacii" pageWidth="421" pageHeight="595" columnWidth="331" leftMargin="45" rightMargin="45" topMargin="0" bottomMargin="36" uuid="523c622d-bbf6-4ab8-97a3-6973eaf1b429">
+	<property name="ireport.zoom" value="1.948717100000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<subDataset name="Table Dataset 1" uuid="f2f338a4-f60a-47eb-9077-24a8fe33a14b">
+		<parameter name="Type" class="java.lang.String"/>
+	</subDataset>
+	<scriptlet name="scriptlet1" class="DateTimeScriptlet"/>
+	<queryString>
+		<![CDATA[select sdb_main.type as type, sdb_main.reg as reg, wdb_dev.zavodnum as zavnum, wdb_tsk.temper as temper, wdb_tsk.humid as humid, wdb_tsk.press as press, pers.fam as fam, pers.otch as othc, pers.name as name, wdb_tsk.date as date
+from sdb_main, wdb_tsk, pers, wdb_dev
+where wdb_dev.id_sdb_main = sdb_main.id and
+wdb_tsk.id_wdb_dev = wdb_dev.id and
+wdb_tsk.id_pers = pers.id and
+wdb_tsk.id not in (select doc_docs.id_wdb_tsk from doc_docs
+	where doc_docs.papercode = '-');]]>
+	</queryString>
+	<field name="type" class="java.lang.Object"/>
+	<field name="reg" class="java.lang.Object"/>
+	<field name="zavnum" class="java.lang.Object"/>
+	<field name="temper" class="java.lang.Object"/>
+	<field name="humid" class="java.lang.Object"/>
+	<field name="press" class="java.lang.Object"/>
+	<field name="fam" class="java.lang.Object"/>
+	<field name="othc" class="java.lang.Object"/>
+	<field name="name" class="java.lang.Object"/>
+	<field name="date" class="java.lang.Object"/>
+	<variable name="monthEnd" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("MMMMM").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{date}))]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="correct_monthEnd" class="java.lang.String">
+		<variableExpression><![CDATA[$V{monthEnd}.equals("Январь") == true ? "января" :
+$V{monthEnd}.equals("Февраль") == true ? "февраля" :
+$V{monthEnd}.equals("Март") == true ? "марта" :
+$V{monthEnd}.equals("Апрель") == true ? "апреля" :
+$V{monthEnd}.equals("Май") == true ? "мая" :
+$V{monthEnd}.equals("Июнь") == true ? "июня" :
+$V{monthEnd}.equals("Июль") == true ? "июля" :
+$V{monthEnd}.equals("Август") == true ? "августа" :
+$V{monthEnd}.equals("Сентябрь") == true ? "сентября" :
+$V{monthEnd}.equals("Октябрь") == true ? "октября" :
+$V{monthEnd}.equals("Ноябрь") == true ? "ноября" :
+$V{monthEnd}.equals("Декабрь") == true ? "декабря" :
+"Не известный"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="date_timeEnd_correct" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("«dd» ").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{date})) +
+$V{correct_monthEnd} +
+new java.text.SimpleDateFormat(" yyyy").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{date})) + " г."]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<detail>
+		<band height="559">
+			<staticText>
+				<reportElement x="0" y="248" width="364" height="20" uuid="d0062d54-12e1-4ef2-9197-be92f987b32e"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="188" width="230" height="20" uuid="fcb8143d-eab3-4c4d-a8c9-2849693a36b1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование, тип, модификация, регистрационный номер в Федеральном
+информационном фонде по обеспечению единства измерений]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="418" width="364" height="20" uuid="f20ec14c-1a60-4644-8d34-34e937c2f075"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                     ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="338" width="364" height="20" uuid="373a81f3-b782-4f1f-8a65-81c876c7004a"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                     ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="438" width="169" height="20" uuid="1e652663-34e6-428d-a89d-692522be6325"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[и на основании результатов первичной]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="288" width="310" height="20" uuid="7f4d3f37-db1e-4a77-9ad8-67ba2055b518"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                               ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="499" width="130" height="20" uuid="2d93717f-ee0b-4663-bc3f-c764e03bfc30"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="499" width="131" height="20" uuid="8d85b6ed-921e-4f0b-b1f0-2f6a42cee241"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="238" width="364" height="20" uuid="c75526ac-b036-432f-9567-fad6e5bca93e"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                    ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="223" y="520" width="108" height="20" uuid="de6c83f5-c8d1-4dc3-85c9-b75925dba0e4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[((String)$F{name}).trim().charAt(0) + "." + ((String)$F{othc}).trim().charAt(0) + "." + (String)$F{fam}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="114" y="368" width="217" height="20" uuid="790a4dc2-dad9-44d8-a0d0-42913cc3b59f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование, тип, заводской номер,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="208" width="363" height="20" uuid="5fd0e24f-96b9-4b30-9d74-f51b885e8c84"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="509" width="92" height="20" uuid="49b2177f-6cbb-451b-a2ed-86f52c1513b8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Подпись]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="448" width="331" height="41" uuid="8ea5d423-65fd-474a-880f-0fa87d20d569"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="8.0"/>
+				</textElement>
+				<text><![CDATA[соответствующим установленным в описании типа метрологическим
+требованиям и пригодным к применению в сфере государственного
+регулирования обеспечения единства измерений.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="328" width="209" height="20" uuid="b934f6aa-d7ee-4b67-8f87-6dec5ace885b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование документа, на основании которого выполнена поверка]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="438" width="89" height="20" uuid="d2a1adca-7f1c-4c02-b94b-465fed0c7b0d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[ поверки признано]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="398" width="151" height="20" uuid="e049d677-7496-4db6-8d6b-3737a6efe46a"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="519" width="92" height="20" uuid="b99589ce-78d9-40c3-955e-dd1f6b97b05f"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="398" width="207" height="20" uuid="dac14440-e305-4ff0-bc46-e899901386d2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[при следующих значениях влияющих факторов:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="539" width="126" height="19" uuid="f7637da0-e534-45e3-90bd-278d729ccfe5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{date_timeEnd_correct}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="388" width="330" height="20" uuid="2557e3af-7096-4765-9419-9eb5398ac980"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[регистрационный номер (при наличии), разряд, класс или погрешность эталона, применяемого при поверке]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="520" width="86" height="20" uuid="be6a00ba-673f-42de-aa53-82aa1212dec2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Поверитель]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="509" width="108" height="20" uuid="97d68428-08b0-4e85-b42a-87de661c2d03"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Инициалы, фамилия]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="318" width="242" height="20" uuid="99e16e94-0208-477f-8183-9572217d8f1d"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="176" width="262" height="20" uuid="528057f2-bb7c-4689-ae8f-73742c9f6393"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="358" width="249" height="20" uuid="a36affaa-d136-4a00-8421-5dc92219c533"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                       ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="540" width="86" height="18" uuid="2cb68aee-1898-4689-8dc2-466ec0c95cea"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Дата поверки]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="358" width="114" height="20" uuid="998d87f8-2bb9-4aff-987c-91a77c47a76e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[с применением эталонов:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="298" width="277" height="20" uuid="41a60a25-7941-48c0-a82a-50cdb89e380d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[наименование величин, диапазонов, на которых поверено средство измерений (если
+предусмотрено методкой поверки)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="479" width="100" height="20" uuid="5783597f-5980-4d72-86d5-c6934685c713"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Знак поверки]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="509" width="131" height="20" uuid="036e5d07-3643-4e8f-9cc2-d44f819b154e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Должность руководителя подразделения]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement mode="Transparent" x="0" y="175" width="331" height="83" uuid="4ebe33f8-5238-49d0-b3d9-5b395d9d0cb8"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="29.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                                          " + $F{type} + ", Госреестр №" + $F{reg}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="207" y="408" width="124" height="20" uuid="8efac05e-1016-48bd-b7f3-72b8a8aad295"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[приводят перечень влияющих факторов,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="428" width="331" height="20" uuid="23bb34ae-ded9-4dcf-bb5a-4c1acdaa8c73"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[нормированных в документе на методику поверки, с указанием их значений]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="378" width="363" height="20" uuid="fb1f7df2-9d81-4514-9bbc-94be1847f30d"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                                                                     ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="499" width="92" height="20" uuid="e88d711f-66f2-4347-a1ca-c6316df92605"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="268" width="131" height="20" uuid="ac523902-fdf9-4edc-9095-1f164eff7ba6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[заводской номер (номера)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="318" width="121" height="20" uuid="ea6fe2e8-e721-4357-a55a-23fa0a6db8b5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[поверено в соответствии с]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="218" width="331" height="20" uuid="168af549-37b2-4658-9009-4f7b701baeb9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(если в состав средства измерений входят несколько автономных измерительных блоков, то приводится
+их перечень и заводские номера)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="268" width="233" height="20" uuid="d00af6e3-109a-4e4a-998e-ec878e90a20c"/>
+				<textElement>
+					<font size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                                                                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="155" width="82" height="20" uuid="4e7daa04-6ed5-4223-80f3-66c940c5d902"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Действительно до]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="519" width="130" height="20" uuid="c1fa6ac8-64ca-4b03-8f49-ca87e0a81b4d"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[                                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="258" width="331" height="20" uuid="9214ac52-03b4-4ed2-895d-6c51f800b4fc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[серия и номер знака предыдущей поверки (если такие серия и номер имеются)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="88" width="331" height="20" uuid="38d4be96-60cc-4396-a7e3-f8d638132567"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Аттестат аккредитации № RA.RU.311341]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="176" width="100" height="20" uuid="54ad9030-e667-4b8c-947a-35d9dd9dc2fc"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Средство измерений]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="438" width="73" height="20" uuid="cb1f5ca2-3d8e-4820-b233-be6c01dd9380"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[(периодической)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="529" width="92" height="19" uuid="4c72e2d2-725b-49b3-9ffa-1bd722b97f23"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Подпись]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="288" width="54" height="20" uuid="8cc125e4-b0e1-4aab-9148-6399954c6db4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[поверено]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="530" width="108" height="19" uuid="3f7d0803-af71-4e7f-b036-4d0b2958405d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Инициалы, фамилия]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="268" width="200" height="20" uuid="6ec4793b-511d-4245-b777-ba4259b85240"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zavnum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="398" width="118" height="20" uuid="2e35382a-e6ac-4c12-a244-4de06f521da8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["температура " + $F{temper} + "°С,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="418" width="331" height="20" uuid="a70e0dd0-caed-4325-ba6c-308a413ea9a6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["относительная влажность " + $F{humid} + " %, атмосферное давление " + $F{press} + " кПа"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="155" width="107" height="20" uuid="b6774475-299e-4862-84bf-517a5d36cbb2"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{scriptlet1_SCRIPTLET}.getDate(new java.text.SimpleDateFormat("dd").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{date})),
+    $V{correct_monthEnd},
+    new java.text.SimpleDateFormat("yyyy").format(new java.text.SimpleDateFormat("yyyy/MM/dd").parse((String)$F{date})))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
