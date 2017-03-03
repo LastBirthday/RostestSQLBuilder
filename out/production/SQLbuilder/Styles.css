@@ -1,0 +1,64 @@
+.button{
+    -fx-background-radius: 5,5,4;
+    -fx-padding: 7 30 7 30;
+    -fx-text-fill: #242d35;
+    -fx-font-size: 12px;
+    -fx-min-width: 100;
+}
+
+.button-long{
+    -fx-background-radius: 5,5,4;
+    -fx-padding: 7 0 7 0;
+    -fx-text-fill: #242d35;
+    -fx-font-size: 12px;
+
+}
+
+.button-round-right{
+    -fx-background-radius: 80px;
+    -fx-border-radius: 80px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-background-color: blue;
+    -fx-graphic: url("../../../resources/buttons_images/next.png");
+}
+
+.button-round-right:pressed {
+    -fx-translate-y: 4;
+    -fx-graphic: url("../../../resources/buttons_images/next1.png");
+}
+
+.button-round-left{
+    -fx-background-radius: 80px;
+    -fx-border-radius: 80px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-background-color: blue;
+    -fx-graphic: url("../../../resources/buttons_images/prev.png");
+}
+
+.button-round-left:pressed {
+    -fx-translate-y: 4;
+    -fx-graphic: url("../../../resources/buttons_images/prev1.png");
+}
+
+.label:error{
+    -fx-text-fill: red;
+}
+
+.text-field:error{
+    -fx-text-box-border: red ;
+}
+
+.text-area:error{
+    -fx-text-box-border: red ;
+}
+
+.combo-box:error{
+    -fx-border-color: red;
+    -fx-border-radius: 4;
+}

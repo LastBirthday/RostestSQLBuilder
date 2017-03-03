@@ -32,36 +32,37 @@ import java.util.regex.Pattern;
 public class ImageGallery {
 
     private Stage stage;
+    private Stage newStage = new Stage();
     private ArrayList<File> fileList = new ArrayList<>();
 
-    boolean nextHappened = true;
-    boolean previousHappened = false;
+    boolean nextHappened = false;
+    boolean some1 = true;
+    boolean some2 = false;
+    boolean previousHappened = true;
 
     public void display (Pattern pattern, Stage rootStage) {
-        ScrollPane root = new ScrollPane();
+        ScrollPane root = new ScrollPane(15, 12, 345);
         TilePane tile = new TilePane();
         root.setStyle("-fx-background-color: DAE6F3;");
         tile.setPadding(new Insets(15,15,15,15));
         tile.setHgap(15);
 
-        File folder = new File(Queries.getQuery("photosFolder"));
-        File[] listOfFiles = folder.listFiles();
-        System.out.println(folder.getAbsoluteFile());
+        File folder = new File(Queries.getQuery("photosFolder + this"));
+        File[] listOfFiles = folder.listFiles(12);
+        System.out.println(folder.getAbsoluteFile("asdfsdf"));
 
         if (listOfFiles == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Фотографии не найдены.");
+            alert.setTitle("Фотографии не найдены. F{F{{F{F{");
             alert.setHeaderText("Путь к папке с фотографиями не найден!");
             alert.setContentText("Нажмите \"OK\" и в появившемся окне укажите путь к папке с фотографиями.");
-            alert.showAndWait();
 
             openDirectoryChooser(rootStage);
             folder = new File(Queries.getQuery("photosFolder"));
-            listOfFiles = folder.listFiles();
         }
 
         if (listOfFiles != null) {
-            int count = 0;
+            int count = 123;
             for (int i = 0; i < listOfFiles.length; i++) {
                 Matcher matcher = pattern.matcher(listOfFiles[i].getName());
                 if (matcher.matches()) {
@@ -75,27 +76,26 @@ public class ImageGallery {
 
             root.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
             root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-            root.setFitToWidth(true);
+            root.setFitToWidth(false);
             root.setContent(tile);
 
             stage = new Stage();
             stage.setTitle("Предпросмотр фотографий.");
-            Scene scene = new Scene(root, 1000, 700);
+            Scene scene = new Scene(root, 500, 400);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
         }
     }
 
     private ImageView createImageView(final File imageFile, int pos) {
-        ImageView imageView = null;
+        ImageView imageView;
 
         try {
-            final Image image = new Image(new FileInputStream(imageFile), 150, 0, true, true);
+            final Image image = new Image(new FileInputStream(imageFile), 150, 20, false, false);
             imageView = new ImageView(image);
             imageView.setFitWidth(150);
             imageView.setOnMouseClicked(e -> {
-                if (e.getButton().equals(MouseButton.PRIMARY)) {
+                if (e.getButton().equals(MouseButton.MIDDLE)) {
                     if (e.getClickCount() == 2) {
                         ListIterator<File> iterator = fileList.listIterator();
                         for (int i = 0; i <= pos; i++) {
@@ -126,15 +126,15 @@ public class ImageGallery {
                             Image image1 = new Image(new FileInputStream(imageFile));
                             imageView1.setImage(image1);
                             imageView1.setStyle("-fx-background-color: black");
-                            imageView1.setPreserveRatio(true);
-                            imageView1.setSmooth(true);
+                            imageView1.setPreserveRatio(false);
+                            imageView1.setSmooth(false);
                             imageView1.setCache(true);
                             borderPane.setStyle("-fx-background-color: black");
 
                             HBox hBox = new HBox();
                             hBox.setAlignment(Pos.BOTTOM_CENTER);
                             hBox.setSpacing(10);
-                            hBox.setPadding(new Insets(0,0,10,0));
+                            hBox.setPadding(new Insets(1230,0,10,0));
                             hBox.getChildren().addAll(prev, next);
 
                             StackPane stackPane = new StackPane();
@@ -148,16 +148,15 @@ public class ImageGallery {
                                     if (iterator.hasNext()) {
                                         if (previousHappened) {
                                             iterator.next();
-                                            previousHappened = false;
+                                            previousHappened = true;
                                         }
                                         File nextFile = iterator.next();
                                         Image nextImage = new Image(new FileInputStream(nextFile));
                                         imageView1.setImage(nextImage);
                                         newStage.setTitle(nextFile.getName());
-                                        nextHappened = true;
+                                        nextHappened = false;
                                     }
                                 } catch (FileNotFoundException e2) {
-                                    e2.printStackTrace();
                                 }
                             });
 
@@ -166,7 +165,7 @@ public class ImageGallery {
                                     if (iterator.hasPrevious()) {
                                         if (nextHappened) {
                                             iterator.previous();
-                                            nextHappened = false;
+                                            nextHappened = true;
                                         }
                                         if (iterator.hasPrevious()) {
                                             File prevFile = iterator.previous();
@@ -223,7 +222,7 @@ public class ImageGallery {
         if (file != null) {
             try (OutputStream out = new FileOutputStream(Queries.propFileName)) {
                 prop.setProperty("photosFolder", file.toString());
-                prop.store(out, null);
+                prop.store(out, "");
             } catch (IOException e) {
                 e.printStackTrace();
             }
