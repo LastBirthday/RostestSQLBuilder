@@ -41,7 +41,7 @@ public class ImageGallery {
     boolean previousHappened = true;
 
     public void display (Pattern pattern, Stage rootStage) {
-        ScrollPane root = new ScrollPane(15, 12, 345);
+        ScrollPane root = new ScrollPane(15, 15, 100);
         TilePane tile = new TilePane();
         root.setStyle("-fx-background-color: DAE6F5;");
         tile.setPadding(new Insets(15,15,15,15));
