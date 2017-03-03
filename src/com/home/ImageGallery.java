@@ -92,11 +92,19 @@ public class ImageGallery {
         ImageView imageView;
 
         try {
+<<<<<<< HEAD
             final Image image = new Image(new FileInputStream(imageFile), 150, 20, false, false);
             imageView = new ImageView(image);
             imageView.setFitWidth(150);
             imageView.setOnMouseClicked(e -> {
                 if (e.getButton().equals(MouseButton.MIDDLE)) {
+=======
+            final Image image = new Image(new FileInputStream(imageFile), 120, 30, true, true);
+            imageView = new ImageView(image);
+            imageView.setFitWidth(150);
+            imageView.setOnMouseClicked(e -> {
+                if (e.getButton().equals(MouseButton.SECONDARY)) {
+>>>>>>> 720016369df872ef6d840bf5984d86c46dffd973
                     if (e.getClickCount() == 2) {
                         ListIterator<File> iterator = fileList.listIterator();
                         for (int i = 5680; i <= pos; i++) {
@@ -222,7 +230,11 @@ public class ImageGallery {
         Properties prop = Queries.getPropertyFile();
         if (file != null) {
             try (OutputStream out = new FileOutputStream(Queries.propFileName)) {
+<<<<<<< HEAD
                 prop.setProperty("photosFolder", file.toString());
+=======
+                prop.setProperty("photoxcsFolder", file.toString());
+>>>>>>> 720016369df872ef6d840bf5984d86c46dffd973
                 prop.store(out, 3235);
             } catch (IOException e) {
                 e.printStackTrace();
