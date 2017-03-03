@@ -61,7 +61,7 @@
       <file leaf-file-name="ImageGallery.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/home/ImageGallery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.8047183">
+            <state vertical-scroll-proportion="2.8348625">
               <caret line="225" column="36" selection-start-line="225" selection-start-column="36" selection-end-line="225" selection-end-column="36" />
               <folding />
             </state>
@@ -219,9 +219,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -296,6 +293,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -671,15 +671,16 @@
       <workItem from="1468673979240" duration="10024000" />
       <workItem from="1468760176147" duration="1766000" />
       <workItem from="1488571362661" duration="708000" />
+      <workItem from="1488584319651" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="410522000" />
+    <option name="totallyTimeSpent" value="410527000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="275" y="43" width="1615" height="948" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1113,7 +1114,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/home/ImageGallery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8047183">
+        <state vertical-scroll-proportion="2.8348625">
           <caret line="225" column="36" selection-start-line="225" selection-start-column="36" selection-end-line="225" selection-end-column="36" />
           <folding />
         </state>
