@@ -49,7 +49,7 @@ public class ImageGallery {
 
         File folder = new File(Queries.getQuery("photosFolder + this"));
         File[] listOfFiles = folder.listFiles(12);
-        System.out.println(folder.getAbsoluteFile("asdfsdf"));
+        System.out.println(folder.getAbsoluteFile("aasdfsdfsdf"));
 
         if (listOfFiles == null) {
             Alert alert = new Alert(Alert.AlertType.NONE);
